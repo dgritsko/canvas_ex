@@ -11,3 +11,17 @@ CanvasRenderingContext2D.prototype['fillRoundedRect'] = function(x, y, w, h, c) 
    this.closePath();
    this.fill();
 }
+
+CanvasRenderingContext2D.prototype['fillPoly'] = function(x, y, v, l) {
+   var angle = ((v - 2) * 180) / v;
+   this.beginPath();
+   var p = { x : x, y : y };
+   this.moveTo(p.x, p.y);
+   for (var i = 0; i < v; i++) {
+      p.x = p.x - (Math.cos(i * (180 - angle) * (Math.PI / 180)) * l);
+      p.y = p.y - (Math.sin(i * (180 - angle) * (Math.PI / 180)) * l);
+	  this.lineTo(p.x, p.y);
+   }
+   this.closePath();
+   this.fill();   
+}
